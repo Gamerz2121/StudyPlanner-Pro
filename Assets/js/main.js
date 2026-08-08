@@ -12,12 +12,16 @@ onAuthStateChanged(auth, (user) => {
 
     if (user) {
         console.log("Logged in as:", user.email);
-        // Redirect to app if on landing or auth page
+
+        // --- REDIRECT LOGIC ---
+        // If logged in and trying to see landing/auth pages, go to the dashboard
         if (path === '/' || path.endsWith('/') || path.includes('index.html') || path.includes('auth.html')) {
             window.location.href = 'app.html';
+            return; // Stop running code below because we are changing pages
         }
 
-        // Initialize features only on app page
+        // --- LOAD FEATURES ---
+        // Initialize dashboard tools only if we are actually on the app page
         if (path.includes('app.html')) {
             initScheduleGenerator();
             initAssignmentTracker();
@@ -25,7 +29,9 @@ onAuthStateChanged(auth, (user) => {
         }
     } else {
         console.log("No user found.");
-        // Redirect to login if trying to access private pages
+        
+        // --- SECURITY GUARD ---
+        // If logged out and trying to see private pages, kick back to login
         if (path.includes('app.html') || path.includes('profile.html') || path.includes('settings.html')) {
             window.location.href = 'auth.html';
         }
