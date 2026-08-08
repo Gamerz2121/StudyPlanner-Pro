@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - StudyPlanner Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-content">
+            <h1><a href="app.html" style="text-decoration: none; color: inherit;">StudyPlanner Pro</a></h1>
+            <div class="header-actions">
+                <button id="theme-toggle" class="btn-icon">🌓 Theme</button>
+                <button id="logout-button" class="btn-secondary">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard" style="display: flex; justify-content: center; padding-top: 3rem;">
+        <section class="card" style="width: 100%; max-width: 500px; text-align: center;">
+            <div class="profile-avatar" style="width: 100px; height: 100px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1.5rem;">
+                <span id="user-initials">??</span>
+            </div>
+            <h2 id="display-name" style="margin-bottom: 0.5rem;">Loading Name...</h2>
+            <p id="user-email" style="color: var(--text); opacity: 0.7; margin-bottom: 2rem;">Loading Email...</p>
+
+            <div style="border-top: 1px solid var(--border); padding-top: 1.5rem; text-align: left;">
+                <h4 style="margin-bottom: 1rem;">Account Statistics</h4>
+                <p><strong>Status:</strong> Free Account</p>
+                <p><strong>Member Since:</strong> August 2026</p>
+            </div>
+
+            <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                <a href="app.html" class="btn-secondary" style="flex: 1; text-decoration: none; text-align: center;">Back to Dashboard</a>
+                <button class="btn-primary" style="flex: 1;">Edit Profile</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pointing to your Assets folder -->
+    <script type="module" src="Assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyPlanner Pro - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <h1>StudyPlanner Pro</h1>
+            <div class="header-actions">
+                <button id="theme-toggle" class="btn-icon">🌓 Theme</button>
+                <div class="user-menu">
+                    <button id="logout-button" class="btn-secondary">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="dashboard">
+        <section class="tool-cards">
+            <!-- Schedule Generator -->
+            <article class="tool-card card">
+                <h3>📅 Schedule Generator</h3>
+                <form id="schedule-form">
+                    <input type="text" name="title" placeholder="Plan Title (e.g. Finals Week)" required>
+                    <input type="text" name="subjects" placeholder="Subjects (comma separated)" required>
+                    <button type="submit" class="btn-primary">Save Schedule</button>
+                </form>
+                <div id="schedule-list" class="item-list"></div>
+            </article>
+
+            <!-- Assignment Tracker -->
+            <article class="tool-card card">
+                <h3>📝 Assignment Tracker</h3>
+                <form id="assignment-form">
+                    <input type="text" name="title" placeholder="Assignment Name" required>
+                    <button type="submit" class="btn-primary">Add Task</button>
+                </form>
+                <div id="assignment-list" class="item-list"></div>
+            </article>
+
+            <!-- Pomodoro Timer -->
+            <article class="tool-card card">
+                <h3>⏱️ Pomodoro Timer</h3>
+                <div id="timer-display" style="font-size: 3rem; text-align: center; margin: 1rem 0;">25:00</div>
+                <button id="start-timer" class="btn-primary" style="width:100%">Start Focus Session</button>
+            </article>
+        </section>
+    </main>
+
+    <!-- THE ONLY SCRIPT YOU NEED -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

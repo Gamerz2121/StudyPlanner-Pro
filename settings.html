@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Settings - StudyPlanner Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-content">
+            <h1><a href="app.html" style="text-decoration: none; color: inherit;">StudyPlanner Pro</a></h1>
+            <div class="header-actions">
+                <button id="theme-toggle" class="btn-icon">🌓 Theme</button>
+                <button id="logout-button" class="btn-secondary">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard" style="display: flex; justify-content: center; padding-top: 3rem;">
+        <section class="card" style="width: 100%; max-width: 600px;">
+            <h2 style="margin-bottom: 2rem;">Settings</h2>
+
+            <div class="settings-group" style="margin-bottom: 2rem;">
+                <h4 style="border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1rem;">Appearance</h4>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <p>Dark Mode Preference</p>
+                    <button id="theme-toggle-settings" class="btn-secondary">Toggle Now</button>
+                </div>
+            </div>
+
+            <div class="settings-group" style="margin-bottom: 2rem;">
+                <h4 style="border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1rem;">Security</h4>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <p>Password</p>
+                    <button class="btn-secondary">Change Password</button>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <p>Two-Factor Auth</p>
+                    <span style="color: var(--text); opacity: 0.5;">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="settings-group" style="margin-bottom: 2rem; color: #ef4444;">
+                <h4 style="border-bottom: 1px solid #ef4444; padding-bottom: 0.5rem; margin-bottom: 1rem;">Danger Zone</h4>
+                <button class="btn-secondary" style="border-color: #ef4444; color: #ef4444; width: 100%;">Delete Account</button>
+            </div>
+
+            <a href="app.html" class="btn-primary" style="display: block; text-decoration: none; text-align: center;">Save & Return</a>
+        </section>
+    </main>
+
+    <script type="module" src="Assets/js/main.js"></script>
+    <script>
+        // Small helper to ensure the settings toggle works too
+        document.getElementById('theme-toggle-settings')?.addEventListener('click', () => {
+            document.getElementById('theme-toggle').click();
+        });
+    </script>
+</body>
+</html>

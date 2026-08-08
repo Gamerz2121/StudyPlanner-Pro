@@ -1,0 +1,89 @@
+:root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --primary: #4f46e5;
+    --card: #f9fafb;
+    --border: #e5e7eb;
+}
+
+[data-theme="dark"] {
+    --bg: #0f172a;
+    --text: #f1f5f9;
+    --primary: #818cf8;
+    --card: #1e293b;
+    --border: #334155;
+}
+
+body { 
+    background: var(--bg); 
+    color: var(--text); 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0; 
+    transition: background 0.3s; 
+}
+
+.app-header { 
+    border-bottom: 1px solid var(--border); 
+    padding: 1rem 2rem; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.card { 
+    background: var(--card); 
+    border: 1px solid var(--border); 
+    padding: 2rem; 
+    border-radius: 0.75rem; 
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary { 
+    background: var(--primary); 
+    color: white; 
+    padding: 0.75rem 1.5rem; 
+    border: none; 
+    border-radius: 0.5rem; 
+    cursor: pointer; 
+    font-weight: 600;
+}
+
+.btn-secondary { 
+    background: transparent; 
+    border: 1px solid var(--border); 
+    color: var(--text); 
+    padding: 0.75rem 1.5rem; 
+    border-radius: 0.5rem; 
+    cursor: pointer;
+}
+
+.form-group { margin-bottom: 1.2rem; }
+
+input, select { 
+    width: 100%; 
+    padding: 0.75rem; 
+    border: 1px solid var(--border); 
+    border-radius: 0.4rem; 
+    background: var(--bg); 
+    color: var(--text); 
+    box-sizing: border-box;
+}
+
+.tool-cards { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 1.5rem; 
+    padding: 2rem; 
+}
+
+.toast { 
+    position: fixed; 
+    bottom: 2rem; 
+    right: 2rem; 
+    background: var(--primary); 
+    color: white; 
+    padding: 1rem 2rem; 
+    border-radius: 0.5rem; 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
