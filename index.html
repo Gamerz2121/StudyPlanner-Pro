@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyPlanner Pro - Free Study Schedule Generator</title>
+    <meta name="description" content="Generate personalized study schedules, track assignments, and boost your productivity with our free tools.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <header>
+        <h1>StudyPlanner Pro</h1>
+        <p>Your free study schedule generator and assignment tracker</p>
+    </header>
+
+    <!-- Auth Modal -->
+    <div id="authModal">
+        <div id="authContent">
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="loginTab">Login</div>
+                <div class="auth-tab" id="signupTab">Sign Up</div>
+            </div>
+            <form id="authForm">
+                <div class="auth-group">
+                    <label for="authEmail">Email:</label>
+                    <input type="email" id="authEmail" required placeholder="you@example.com">
+                </div>
+                <div class="auth-group">
+                    <label for="authPassword">Password:</label>
+                    <input type="password" id="authPassword" minlength="6" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="auth-btn" id="authSubmitBtn">Sign Up</button>
+                <div id="switchForm">Don't have an account? <span id="switchLink">Sign Up</span></div>
+                <p id="authMessage"></p>
+            </form>
+        </div>
+    </div>
+
+    <main>
+        <!-- Study Schedule Generator -->
+        <section class="tool">
+            <h2>Study Schedule Generator</h2>
+            <form id="scheduleForm">
+                <div class="form-group">
+                    <label for="subjects">Subjects (comma-separated):</label>
+                    <input type="text" id="subjects" placeholder="e.g., Math, History, Biology" required>
+                </div>
+                <div class="form-group">
+                    <label for="hoursPerDay">Available study hours per day:</label>
+                    <input type="number" id="hoursPerDay" min="1" max="12" value="3" required>
+                </div>
+                <div class="form-group">
+                    <label for="daysUntilExam">Days until exam/deadline:</label>
+                    <input type="number" id="daysUntilExam" min="1" value="7" required>
+                </div>
+                <button type="submit">Generate Schedule</button>
+            </form>
+            <div id="scheduleResult" class="result hidden">
+                <h3>Your Personalized Study Schedule</h3>
+                <p id="scheduleOutput"></p>
+                <button id="downloadSchedule">Download as Text</button>
+            </div>
+        </section>
+
+        <!-- Assignment Tracker -->
+        <section class="tool">
+            <h2>Assignment Tracker</h2>
+            <form id="assignmentForm">
+                <div class="form-group">
+                    <label for="assignmentName">Assignment Name:</label>
+                    <input type="text" id="assignmentName" placeholder="e.g., Math Homework #3" required>
+                </div>
+                <div class="form-group">
+                    <label for="dueDate">Due Date:</label>
+                    <input type="date" id="dueDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priority:</label>
+                    <select id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <button type="submit">Add Assignment</button>
+            </form>
+            <div id="assignmentsList">
+                <h3>Your Assignments</h3>
+                <ul id="assignmentItems"></ul>
+                <p id="noAssignments" class="hidden">No assignments added yet.</p>
+            </div>
+        </section>
+
+        <!-- Pomodoro Timer -->
+        <section class="tool">
+            <h2>Pomodoro Timer</h2>
+            <div class="timer-display" id="timerDisplay">25:00</div>
+            <div class="timer-controls">
+                <button id="startTimer">Start</button>
+                <button id="pauseTimer">Pause</button>
+                <button id="resetTimer">Reset</button>
+            </div>
+            <div class="timer-settings">
+                <label>Work minutes: <input type="number" id="workMinutes" value="25" min="1" max="60"></label>
+                <label>Break minutes: <input type="number" id="breakMinutes" value="5" min="1" max="30"></label>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> StudyPlanner Pro. All rights reserved.</p>
+    </footer>
+
+    <!-- Welcome Modal -->
+    <div id="welcomeModal" class="modal">
+      <div class="welcome-content">
+        <div class="welcome-header">
+          <h2>Welcome to StudyPlanner Pro! ���� �� �� 🎓</h2>
+          <button id="closeWelcome" class="welcome-close">&times;</button>
+        </div>
+
+        <div class="welcome-body">
+          <p>You've taken the first step toward better study habits and improved productivity. Let's get you set up in under 60 seconds!</p>
+
+          <div class="welcome-features">
+            <div class="feature-item">
+              <div class="feature-icon">���������📅</div>
+              <div class="feature-text">
+                <h3>Generate Your Study Schedule</h3>
+                <p>Tell us your subjects, available time, and deadline - we'll create a personalized plan that actually works.</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">���������📝</div>
+              <div class="feature-text">
+                <h3>Track All Your Assignments</h3>
+                <p>Never miss a deadline again. Add homework, projects, and exams with priorities and due dates.</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">��������⏱������️</div>
+              <div class="feature-text">
+                <h3>Stay Focused with Pomodoro</h3>
+                <p>Work in focused 25-minute bursts with automatic break reminders - proven to boost retention.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="welcome-tip">
+            <div class="tip-icon">���������💡</div>
+            <div class="tip-text">
+              <p><strong>Pro Tip:</strong> Start by creating a study schedule for your next big exam or project - it takes less than 2 minutes!</p>
+            </div>
+          </div>
+
+          <div class="welcome-actions">
+            <button id="skipWelcome" class="welcome-btn-secondary">Maybe Later</button>
+            <button id="startWelcome" class="welcome-btn-primary">Let's Create My First Schedule</button>
+          </div>
+
+          <p class="welcome-footer">
+            Your data is private and saved securely to your account. No spam, no selling - just helpful study tools.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tutorial Walkthrough Modal -->
+    <div id="tutorialModal" class="tutorial-modal">
+      <div class="tutorial-content">
+        <div class="tutorial-header">
+          <h2>Let's Get Started! ���� �� �� 🚀</h2>
+          <button id="tutorialClose" class="tutorial-close">&times;</button>
+          <div class="tutorial-progress">
+            <span id="tutorialStep">1</span> / <span id="tutorialTotal">3</span>
+          </div>
+        </div>
+
+        <div class="tutorial-body">
+          <div id="tutorialStepContent">
+            <!-- Step content will be injected here by JavaScript -->
+          </div>
+        </div>
+
+        <div class="tutorial-footer">
+          <button id="tutorialPrev" class="tutorial-btn-secondary" disabled>Previous</button>
+          <button id="tutorialNext" class="tutorial-btn-primary">Next Step</button>
+          <button id="tutorialSkip" class="tutorial-btn-link">Skip Tutorial</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- First Schedule Follow-Up Message -->
+    <div id="firstScheduleMessage" class="follow-up-message">
+      <div class="follow-up-content">
+        <div class="follow-up-icon">���������🎉</div>
+        <div class="follow-up-text">
+          <h3>Great job creating your first study schedule!</h3>
+          <p>You've taken a powerful step toward better grades and less stress.</p>
+        </div>
+        <button id="followUpClose" class="follow-up-close">&times;</button>
+        <div class="follow-up-actions">
+          <button id="tryAssignments" class="follow-up-btn">Try Assignment Tracker</button>
+          <button id="tryTimer" class="follow-up-btn">Try Pomodoro Timer</button>
+        </div>
+        <p class="follow-up-tip">
+          ���� �� �� 💡 Pro tip: Try creating schedules for different subjects to see how your optimal study time changes!
+        </p>
+      </div>
+    </div>
+
+    <!-- Firebase SDKs (duplicate for safety if script.js loads first) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
